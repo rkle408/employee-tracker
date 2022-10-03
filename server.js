@@ -1,5 +1,9 @@
-// get the client
+// get the mysql2 client
 const mysql = require('mysql2');
+// Inquirer:
+var inquirer = require('inquirer');
+// call console.table once somewhere in the beginning of the app
+const cTable = require('console.table');
 
 // create the connection to database
 const connection = mysql.createConnection({
@@ -8,7 +12,7 @@ const connection = mysql.createConnection({
   database: 'test'
 });
 
-var inquirer = require('inquirer');
+// Ask questions here:
 inquirer
   .prompt([
     /* Pass your questions in here */
@@ -26,7 +30,7 @@ inquirer
 
 // simple query
 connection.query(
-  'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
+  'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45', //Just an example from website
   function(err, results, fields) {
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
@@ -43,8 +47,6 @@ connection.query(
 );
 
 // Console.table:
-// call once somewhere in the beginning of the app
-const cTable = require('console.table');
 console.table([
   {
     name: 'foo',
