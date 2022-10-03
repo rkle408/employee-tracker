@@ -5,12 +5,24 @@ var inquirer = require('inquirer');
 // call console.table once somewhere in the beginning of the app
 const cTable = require('console.table');
 
+// Need a PORT
+const PORT = process.env.PORT || 3001;
+
+// Express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // create the connection to database
 const connection = mysql.createConnection({
   host: 'localhost',
+  //MySQL username:
   user: 'root',
-  database: 'test'
-});
+  //MySQL password:
+  password: '',
+  database: 'employee_db'
+  },
+  console.log(`Connected to the employee_db database.`)
+);
 
 // Ask questions here:
 inquirer
@@ -56,3 +68,8 @@ console.table([
     age: 20
   }
 ]);
+
+app.listen(PORT, () => {
+    console.log(`Server running on port http://localhost:${PORT}`);
+});
+  
