@@ -46,6 +46,46 @@ const questions = [
             }
         }
     },
+    {
+        type: 'input',
+        name: 'addFirstName',
+        message: "What is the employee's first name?",
+        when: (answers) => {
+            if (answers.action === 'Add an employee') {
+                return true;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'addLastName',
+        message: "What is the employee's last name?",
+        when: (answers) => {
+            if (answers.action === 'Add an employee') {
+                return true;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'addEmpRole',
+        message: "What is the employee's role?",
+        when: (answers) => {
+            if (answers.action === 'Add an employee') {
+                return true;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'addManager',
+        message: "Who is the employee's manager?",
+        when: (answers) => {
+            if (answers.action === 'Add an employee') {
+                return true;
+            }
+        }
+    },
 ];
 
 module.exports = questions;
