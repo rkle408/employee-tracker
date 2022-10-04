@@ -34,6 +34,7 @@ const connection = mysql.createConnection({
   password: password,
   database: 'employee_db'
   },
+
   console.log(`Connected to the employee_db database.`)
 );
 
@@ -43,14 +44,27 @@ function init() {
         .prompt(questions)
         .then((answers) => {
             // Need to do switch case here
-            connection.query()
             console.log(answers);
+            switch (answers.action) {
+                case 'View all departments':
+                    viewDepartments();
+                    break;
+            }
     });
 };
 
 // Need to make functions to execute showing data and saving data
-// function viewDepartments()
+function viewDepartments() {
+    var query = 'SELECT id, department.name AS Department FROM department ';
+    connection.query(query, function(err, res) {
+        console.table(res);
+        init();
+    });
+};
+
 // function viewRoles()
+
+
 // function viewEmployees()
 
 // Will likely move adding actions here and remove from questions.js
