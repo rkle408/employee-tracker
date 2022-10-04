@@ -5,7 +5,6 @@ var inquirer = require('inquirer');
 // call console.table once somewhere in the beginning of the app
 const cTable = require('console.table');
 const questions = require('./questions');
-const { DefaultDeserializer } = require('v8');
 const password = require('./config');
 
 console.log(`\n

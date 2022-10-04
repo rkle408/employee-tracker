@@ -20,15 +20,11 @@ VALUES
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
-    (804, "Tyler", "Dimich", 451, '0'),
+    (804, "Tyler", "Dimich", 451, NULL),
     (805, "Yamilet", "Barcenas", 452, 804),
-    (801, "David", "Rickerson", 453, '0'),
+    (801, "David", "Rickerson", 453, NULL),
     (806, "Maritza", "Diaz", 454, 801),
-    (802, "Brianna", "Jordan", 455, '0'),
+    (802, "Brianna", "Jordan", 455, NULL),
     (807, "Colin", "Stanhope", 456, 802),
-    (803, "Jeffrey", "Wang", 457, '0'),
+    (803, "Jeffrey", "Wang", 457, NULL),
     (808, "Bryan", "Habet", 458, 803);
-
-SELECT * FROM department;
-SELECT * FROM role;
-SELECT * FROM employee;
