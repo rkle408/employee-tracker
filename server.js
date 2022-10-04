@@ -5,6 +5,8 @@ var inquirer = require('inquirer');
 // call console.table once somewhere in the beginning of the app
 const cTable = require('console.table');
 const questions = require('./questions');
+const { DefaultDeserializer } = require('v8');
+const password = require('./config');
 
 console.log(`\n
 ######## ##     ## ########  ##        #######  ##    ## ######## ######## 
@@ -30,7 +32,7 @@ const connection = mysql.createConnection({
   //MySQL username:
   user: 'root',
   //MySQL password:
-  password: 'kakashi!',
+  password: password,
   database: 'employee_db'
   },
   console.log(`Connected to the employee_db database.`)
@@ -41,24 +43,22 @@ function init() {
     inquirer
         .prompt(questions)
         .then((answers) => {
+            connection.query()
             console.log(answers);
     });
     // .catch((error) => {
-    //     if (error.isTtyError) {
-    //       // Prompt couldn't be rendered in the current environment
-    //     } else {
-    //       // Something else went wrong
-    //     }
-    // })
+    //     if (err) {
+    //       console.log(err)
+    // });
 };
 
-// // simple query
+// simple query
 // connection.query(
-//   'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45', //Just an example from website
-//   function(err, results, fields) {
-//     console.log(results); // results contains rows returned by server
-//     console.log(fields); // fields contains extra meta data about results, if available
-//   }
+//   "INSERT INTO department WHERE name = ?", //Just an example from website
+// //   function(err, results, fields) {
+// //     console.log(results); // results contains rows returned by server
+// //     console.log(fields); // fields contains extra meta data about results, if available
+// //   }
 // );
 
 // // with placeholder

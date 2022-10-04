@@ -2,3 +2,5 @@ DS_store/
 
 # Dependency directories
 node_modules/
+
+config.js
