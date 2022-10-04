@@ -4,15 +4,7 @@ const mysql = require('mysql2');
 var inquirer = require('inquirer');
 // call console.table once somewhere in the beginning of the app
 const cTable = require('console.table');
-const express = require('express');
-const app = express();
-
-// Need a PORT
-const PORT = process.env.PORT || 3001;
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+const questions = require('./questions');
 
 console.log(`\n
 ######## ##     ## ########  ##        #######  ##    ## ######## ######## 
@@ -31,45 +23,6 @@ console.log(`\n
 ##     ## ##     ## ##    ## ##     ##  ######   ######## ##     ## 
 \n`);
 
-// Array of questions for user:
-const questions = [
-    {
-        type: 'list',
-        name: 'action',
-        message: 'What would you like to do?',
-        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role'],
-    },
-    {
-        type: 'input',
-        name: 'addDept',
-        message: 'What is the name of the department?',
-        when: (answers) => {
-            if (answers.action === 'Add a department') {
-                return true;
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'addRole',
-        message: 'What is the name of the role?',
-        when: (answers) => {
-            if (answers.action === 'Add a role') {
-                return true;
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'addSalary',
-        message: 'What is the salary of the role?',
-        when: (answers) => {
-            if (answers.action === 'Add a role') {
-                return true;
-            }
-            }
-    },
-];
 
 // create the connection to database
 const connection = mysql.createConnection({
@@ -130,8 +83,3 @@ function init() {
 
 // Call inquirer function:
 init();
-
-app.listen(PORT, () => {
-    //console.log(`Server running on port http://localhost:${PORT}`);
-});
-  
