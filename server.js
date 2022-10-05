@@ -58,6 +58,10 @@ function init() {
                     viewEmployees();
                     break;
 
+                case 'View employees by manager':
+                    viewByManager();
+                    break;
+
                 case 'Add a department':
                     addDept();
                     break;
@@ -97,6 +101,20 @@ function viewEmployees() {
     JOIN role ON employee.role_id = role.id
     JOIN department ON role.department_id = department.id
     ORDER BY employee.id`;
+    connection.query(query, function(err, res) {
+        console.log('\n');
+        console.table(res);
+        init();
+    });
+};
+
+function viewByManager() {
+    let query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+    FROM employee
+    JOIN employee manager ON manager.id = employee.manager_id
+    JOIN role ON employee.role_id = role.id
+    JOIN department ON role.department_id = department.id
+    ORDER BY manager`;
     connection.query(query, function(err, res) {
         console.log('\n');
         console.table(res);
