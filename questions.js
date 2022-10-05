@@ -29,9 +29,7 @@ const questions = [
     //     }
     // },
     // {
-    //     type: 'input',
-    //     name: 'addFirstName',
-    //     message: "What is the employee's first name?",
+
     //     when: (answers) => {
     //         if (answers.action === 'Add an employee') {
     //             return true;

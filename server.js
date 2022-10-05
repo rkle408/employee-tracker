@@ -206,6 +206,26 @@ function addRole() {
         })
 };
 
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'addFirstName',
+                message: "What is the employee's first name?",
+            }
+        ])
+        .then((answer) => {
+            console.log(answer);
+            let query = 'INSERT INTO employee (title) VALUES (?);'
+            connection.query(query, answer.addFirstName, function(err, res) {
+                console.log("\n");
+                console.log("Successfully added first name!");
+            })
+            viewEmployees();
+            init();
+        })
+};
 
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
