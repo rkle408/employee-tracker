@@ -58,6 +58,10 @@ function init() {
                     viewEmployees();
                     break;
 
+                case 'Add a department':
+                    addDept();
+                    break;
+
                 // default: 
                 //     add(answers.action)
             }
@@ -66,38 +70,60 @@ function init() {
 
 // Need to make functions to execute showing data and saving data
 function viewDepartments() {
-    var query = `SELECT id, department.name AS Department 
+    let query = `SELECT id, department.name AS Department 
     FROM department`;
     connection.query(query, function(err, res) {
-        console.table(res);
         console.log('\n');
+        console.table(res);
         init();
     });
 };
 
 function viewRoles() {
-    var query = `SELECT role.id, role.title, department.name AS department, role.salary 
+    let query = `SELECT role.id, role.title, department.name AS department, role.salary 
     FROM role 
     JOIN department ON role.department_id = department.id`;
     connection.query(query, function(err, res) {
-    console.table(res);
-    init();
+        console.log('\n');
+        console.table(res);
+        init();
     });
 };
 
 function viewEmployees() {
-    var query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+    let query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
     FROM employee
     LEFT JOIN employee manager ON manager.id = employee.manager_id
     JOIN role ON employee.role_id = role.id
     JOIN department ON role.department_id = department.id
     ORDER BY employee.id`;
     connection.query(query, function(err, res) {
-    console.table(res);
-    init();
+        console.log('\n');
+        console.table(res);
+        init();
     });
 };
 
+function addDept() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'addDept',
+                message: 'What is the name of the department?',
+            }
+        ])
+        .then((answer) => {
+            console.log(answer);
+            let query = 'INSERT INTO department (name) VALUES (?);'
+            connection.query(query, function(err, res) {
+                console.log("\n");
+                console.log("Successfully added new department!");
+            })
+            viewDepartments();
+            init();
+        })
+}
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
 // function add(type) {
@@ -117,4 +143,5 @@ function viewEmployees() {
 // Will likely move adding actions here and remove from questions.js
 
 // Call inquirer function:
+
 init();
