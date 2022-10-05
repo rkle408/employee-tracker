@@ -74,6 +74,14 @@ function init() {
                     addDept();
                     break;
 
+                case 'Add a role':
+                    addRole();
+                    break;
+
+                case 'Add an employee':
+                    addEmployee();
+                    break;
+
                 // default: 
                 //     add(answers.action)
             }
@@ -176,6 +184,29 @@ function addDept() {
             init();
         })
 }
+
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'addRole',
+                message: 'What is the title of the role?',
+            }
+        ])
+        .then((answer) => {
+            console.log(answer);
+            let query = 'INSERT INTO role (title) VALUES (?);'
+            connection.query(query, answer.addRole, function(err, res) {
+                console.log("\n");
+                console.log("Successfully added new role!");
+            })
+            viewRoles();
+            init();
+        })
+};
+
+
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
 // function add(type) {
