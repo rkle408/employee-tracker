@@ -70,6 +70,10 @@ function init() {
                     addDept();
                     break;
 
+                case 'View total utilized budget of a department':
+                    deptBudget();
+                    break;
+
                 // default: 
                 //     add(answers.action)
             }
@@ -160,6 +164,18 @@ function addDept() {
             init();
         })
 }
+
+function deptBudget() {
+    let query = `SELECT department.name AS Department, SUM(role.salary) AS budget
+    FROM role 
+    JOIN department ON role.department_id = department.id
+    GROUP BY department.id`;
+    connection.query(query, function(err, res) {
+        console.log('\n');
+        console.table(res);
+        init();
+    });
+};
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
 // function add(type) {
