@@ -6,8 +6,9 @@ const questions = [
         message: 'What would you like to do?',
         choices: ['View all departments', 'View all roles', 'View all employees', 'View employees by manager', 'View employees by department', 'View total utilized budget of a department', 'Update an employee role', 'Add a department', 'Add a role', 'Add an employee'],
     }
+];
 
-
+//Questions to be added to adding roles and employees
     // {
     //     type: 'input',
     //     name: 'addSalary',
@@ -30,12 +31,6 @@ const questions = [
     // },
     // {
 
-    //     when: (answers) => {
-    //         if (answers.action === 'Add an employee') {
-    //             return true;
-    //         }
-    //     }
-    // },
     // {
     //     type: 'input',
     //     name: 'addLastName',
@@ -66,6 +61,5 @@ const questions = [
     //         }
     //     }
     // },
-];
 
 module.exports = questions;
