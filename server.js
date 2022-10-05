@@ -66,12 +66,12 @@ function init() {
                     viewByDepartment();
                     break;
 
-                case 'Add a department':
-                    addDept();
-                    break;
-
                 case 'View total utilized budget of a department':
                     deptBudget();
+                    break;
+
+                case 'Add a department':
+                    addDept();
                     break;
 
                 // default: 
@@ -144,6 +144,18 @@ function viewByDepartment() {
         });
 };
 
+function deptBudget() {
+    let query = `SELECT department.name AS Department, SUM(role.salary) AS Budget
+    FROM role 
+    JOIN department ON role.department_id = department.id
+    GROUP BY department.id`;
+    connection.query(query, function(err, res) {
+        console.log('\n');
+        console.table(res);
+        init();
+    });
+};
+
 function addDept() {
     inquirer
         .prompt([
@@ -156,7 +168,7 @@ function addDept() {
         .then((answer) => {
             console.log(answer);
             let query = 'INSERT INTO department (name) VALUES (?);'
-            connection.query(query, function(err, res) {
+            connection.query(query, answer.addDept, function(err, res) {
                 console.log("\n");
                 console.log("Successfully added new department!");
             })
@@ -164,18 +176,6 @@ function addDept() {
             init();
         })
 }
-
-function deptBudget() {
-    let query = `SELECT department.name AS Department, SUM(role.salary) AS budget
-    FROM role 
-    JOIN department ON role.department_id = department.id
-    GROUP BY department.id`;
-    connection.query(query, function(err, res) {
-        console.log('\n');
-        console.table(res);
-        init();
-    });
-};
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
 // function add(type) {
