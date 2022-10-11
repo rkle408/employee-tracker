@@ -192,12 +192,22 @@ function addRole() {
                 type: 'input',
                 name: 'addRole',
                 message: 'What is the title of the role?',
+            },
+            {
+                type: 'input',
+                name: 'addSal',
+                message: 'What is the salary of the role?',
+            },
+            {
+                type: 'input',
+                name: 'addDept',
+                message: 'What is the dept number of the role?',
             }
         ])
         .then((answer) => {
-            console.log(answer);
-            let query = 'INSERT INTO role (title) VALUES (?);'
-            connection.query(query, answer.addRole, function(err, res) {
+            let query = 'INSERT INTO employee (title, salary, department_id) VALUES (?,?,?);'
+            connection.query(query, [answer.addRole, answer.addSal, answer.addDept], function(err, res) {
+                // console.log(res);
                 console.log("\n");
                 console.log("Successfully added new role!");
             })
@@ -213,12 +223,23 @@ function addEmployee() {
                 type: 'input',
                 name: 'addFirstName',
                 message: "What is the employee's first name?",
-            }
+            },
+            {
+                type: 'input',
+                name: 'addLastName',
+                message: "What is the employee's last name?",
+            },
+            {
+                type: 'list',
+                name: 'addEmpRole',
+                message: "What is the employee's role?",
+                choices: [451, 452, 453, 454, 455, 456, 457, 458],
+            },
         ])
         .then((answer) => {
-            console.log(answer);
-            let query = 'INSERT INTO employee (title) VALUES (?);'
-            connection.query(query, answer.addFirstName, function(err, res) {
+            //console.log(answer);
+            let query = 'INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?);'
+            connection.query(query, [answer.addFirstName, answer.addLastName, answer.addEmpRole], function(err, res) {
                 console.log("\n");
                 console.log("Successfully added first name!");
             })
