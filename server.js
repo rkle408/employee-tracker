@@ -70,6 +70,10 @@ function init() {
                     deptBudget();
                     break;
 
+                case 'Update an employee role':
+                    updateEmployee();
+                    break;
+
                 case 'Add a department':
                     addDept();
                     break;
@@ -241,13 +245,40 @@ function addEmployee() {
             let query = 'INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?);'
             connection.query(query, [answer.addFirstName, answer.addLastName, answer.addEmpRole], function(err, res) {
                 console.log("\n");
-                console.log("Successfully added first name!");
+                console.log("Successfully updated employee role!");
             })
             viewEmployees();
             init();
         })
 };
 
+function updateEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'updateEmp',
+                message: 'Which employee do you want to update?',
+                choices: [801, 802, 803, 804, 805, 806, 807, 808]
+            },
+            {
+                type: 'list',
+                name: 'updateNewRole',
+                message: 'What is the new role?',
+                choices: [451, 452, 453, 454, 455, 456, 457, 458],
+            },
+        ])
+        .then((answer) => {
+            let query = 'UPDATE role SET title WHERE id = (?, ?);'
+            connection.query(query, [answer.updateEmp, answer.updateNewRole], function(err, res) {
+                console.log(res);
+                console.log("\n");
+                console.log("Successfully added new role!");
+            })
+            viewEmployees();
+            init();
+        })
+}
 
 // // CAN Use function that can do multiple jobs to execute to minimize code
 // function add(type) {
