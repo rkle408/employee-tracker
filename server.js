@@ -203,13 +203,14 @@ function addRole() {
                 message: 'What is the salary of the role?',
             },
             {
-                type: 'input',
+                type: 'list',
                 name: 'addDept',
                 message: 'What is the dept number of the role?',
-            }
+                choices: [001, 002, 003, 004, 005]
+            },
         ])
         .then((answer) => {
-            let query = 'INSERT INTO employee (title, salary, department_id) VALUES (?,?,?);'
+            let query = 'INSERT INTO role (title, salary, department_id) VALUES (?,?,?);'
             connection.query(query, [answer.addRole, answer.addSal, answer.addDept], function(err, res) {
                 // console.log(res);
                 console.log("\n");
